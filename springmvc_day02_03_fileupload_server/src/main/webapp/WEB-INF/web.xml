@@ -1,0 +1,27 @@
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+
+  <!--配置前端控制器-->
+  <servlet>
+    <servlet-name>default</servlet-name>
+    <servlet-class>org.apache.catalina.servlets.DefaultServlet</servlet-class>
+    <!-- 添加，解决jersey上传服务器403错误 -->
+    <init-param>
+      <param-name>readonly</param-name>
+      <param-value>false</param-value>
+    </init-param>
+    <init-param>
+      <param-name>debug</param-name>
+      <param-value>0</param-value>
+    </init-param>
+    <init-param>
+      <param-name>listings</param-name>
+      <param-value>false</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+
+
+
+</web-app>

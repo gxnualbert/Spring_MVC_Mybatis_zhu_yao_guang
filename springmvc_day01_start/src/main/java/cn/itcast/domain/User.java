@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
 /**
- * @auther gxnualbert
+ * @auther gxnulizzie
  * @create 2019-08-05-10:54
  */
 

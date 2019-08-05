@@ -1,5 +1,7 @@
 package cn.gxnulizzie.controller;
 
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.WebResource;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -82,6 +84,33 @@ public class UserController {
         String uuid = UUID.randomUUID().toString().replace("-", "");
         filename=uuid+"_"+filename;
         upload.transferTo(new File(path,filename)); //完成文件上传
+        return "success";
+    }
+
+    /**
+     * 跨文件服务器方式文件上传
+     */
+    @RequestMapping("/fileupload3")
+    public String fileupload3( MultipartFile upload) throws Exception {
+        System.out.println("S跨文件服务器方式 文件上传");
+
+//        确定在文件服务器中，哪个文件夹是用来存放图片的
+        String path="http://localhost:9090/springmvc_day02_03_fileupload_server_war/uploads/";
+//            在跑起来之前，要手动在目录D:\soft\apache-tomcat-8.5.31\webapps\springmvc_day02_03_fileupload_server_war\下新建一个文件夹爱uploads
+        String filename=upload.getOriginalFilename();// 使用spring MVC的方式，获取文件名
+//                给文件的名称设置一个唯一值 uuid追加
+        String uuid = UUID.randomUUID().toString().replace("-", "");
+        filename=uuid+"_"+filename;
+
+//        创建客户端对象
+        Client client=Client.create();
+//        upload.transferTo(new File(path,filename)); //完成文件上传
+//        和图片服务器进行连接
+        WebResource webResource=client.resource(path+filename);
+        System.out.println(path+filename);
+//        上传图片
+        webResource.put(upload.getBytes());
+        System.out.println("已经走完 跨服务器客户端");
         return "success";
     }
 }
