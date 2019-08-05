@@ -13,9 +13,11 @@
 <body>
 <h3>执行成功</h3>
 
-${user.username}
-${user.password}
-${user.age}
+从model中取出来的用户名：${user.username}<br/>
+从model中取出来的密码：${user.password}<br/>
+从model中取出来的年龄：${user.age}<br/>
+<br/>
+<br/>
 
 </body>
 </html>
